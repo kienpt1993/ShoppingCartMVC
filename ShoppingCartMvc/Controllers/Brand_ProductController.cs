@@ -10,116 +10,116 @@ using ShopingCartEF;
 
 namespace ShoppingCartMvc.Controllers
 {
-    public class ProductController : Controller
+    public class Brand_ProductController : Controller
     {
         private ShoppingCartEntities db = new ShoppingCartEntities();
 
-        // GET: /Product/
+        // GET: /Brand_Product/
         public ActionResult Index()
         {
-            var products = db.Products.Include(p => p.Brand).Include(p => p.Category);
-            return View(products.ToList());
+            var band_product = db.Band_Product.Include(b => b.Brand).Include(b => b.Product);
+            return View(band_product.ToList());
         }
 
-        // GET: /Product/Details/5
+        // GET: /Brand_Product/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Product product = db.Products.Find(id);
-            if (product == null)
+            Band_Product band_product = db.Band_Product.Find(id);
+            if (band_product == null)
             {
                 return HttpNotFound();
             }
-            return View(product);
+            return View(band_product);
         }
 
-        // GET: /Product/Create
+        // GET: /Brand_Product/Create
         public ActionResult Create()
         {
             ViewBag.BrandID = new SelectList(db.Brands, "BrandID", "ImageUrl");
-            ViewBag.CategoryID = new SelectList(db.Categories, "CategoryID", "Description");
+            ViewBag.ProductsID = new SelectList(db.Products, "ProductsID", "ImageUrl");
             return View();
         }
 
-        // POST: /Product/Create
+        // POST: /Brand_Product/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include="ProductsID,CategoryID,BrandID,ImageUrl,Name,Description,Price,SalePrice,Detail,DateCreated,SortOrder,IsPublished")] Product product)
+        public ActionResult Create([Bind(Include="BrandID,ProductsID,Note")] Band_Product band_product)
         {
             if (ModelState.IsValid)
             {
-                db.Products.Add(product);
+                db.Band_Product.Add(band_product);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.BrandID = new SelectList(db.Brands, "BrandID", "ImageUrl", product.BrandID);
-            ViewBag.CategoryID = new SelectList(db.Categories, "CategoryID", "Name", product.CategoryID);
-            return View(product);
+            ViewBag.BrandID = new SelectList(db.Brands, "BrandID", "ImageUrl", band_product.BrandID);
+            ViewBag.ProductsID = new SelectList(db.Products, "ProductsID", "ImageUrl", band_product.ProductsID);
+            return View(band_product);
         }
 
-        // GET: /Product/Edit/5
+        // GET: /Brand_Product/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Product product = db.Products.Find(id);
-            if (product == null)
+            Band_Product band_product = db.Band_Product.Find(id);
+            if (band_product == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.BrandID = new SelectList(db.Brands, "BrandID", "ImageUrl", product.BrandID);
-            ViewBag.CategoryID = new SelectList(db.Categories, "CategoryID", "Name", product.CategoryID);
-            return View(product);
+            ViewBag.BrandID = new SelectList(db.Brands, "BrandID", "ImageUrl", band_product.BrandID);
+            ViewBag.ProductsID = new SelectList(db.Products, "ProductsID", "ImageUrl", band_product.ProductsID);
+            return View(band_product);
         }
 
-        // POST: /Product/Edit/5
+        // POST: /Brand_Product/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include="ProductsID,CategoryID,BrandID,ImageUrl,Name,Description,Price,SalePrice,Detail,DateCreated,SortOrder,IsPublished")] Product product)
+        public ActionResult Edit([Bind(Include="BrandID,ProductsID,Note")] Band_Product band_product)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(product).State = EntityState.Modified;
+                db.Entry(band_product).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.BrandID = new SelectList(db.Brands, "BrandID", "ImageUrl", product.BrandID);
-            ViewBag.CategoryID = new SelectList(db.Categories, "CategoryID", "Description", product.CategoryID);
-            return View(product);
+            ViewBag.BrandID = new SelectList(db.Brands, "BrandID", "ImageUrl", band_product.BrandID);
+            ViewBag.ProductsID = new SelectList(db.Products, "ProductsID", "ImageUrl", band_product.ProductsID);
+            return View(band_product);
         }
 
-        // GET: /Product/Delete/5
+        // GET: /Brand_Product/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Product product = db.Products.Find(id);
-            if (product == null)
+            Band_Product band_product = db.Band_Product.Find(id);
+            if (band_product == null)
             {
                 return HttpNotFound();
             }
-            return View(product);
+            return View(band_product);
         }
 
-        // POST: /Product/Delete/5
+        // POST: /Brand_Product/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Product product = db.Products.Find(id);
-            db.Products.Remove(product);
+            Band_Product band_product = db.Band_Product.Find(id);
+            db.Band_Product.Remove(band_product);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

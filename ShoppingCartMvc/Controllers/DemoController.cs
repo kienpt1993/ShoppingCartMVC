@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
+
 namespace ShoppingCartMvc.Controllers
 {
     public class DemoController : Controller
@@ -15,6 +16,7 @@ namespace ShoppingCartMvc.Controllers
             // ADO.NET
             return View();
         }
+       
 	}
 }
 // Them xoa sua danh muc, them xoa sua san pham ... Backend

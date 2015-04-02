@@ -10,116 +10,107 @@ using ShopingCartEF;
 
 namespace ShoppingCartMvc.Controllers
 {
-    public class ProductController : Controller
+    public class PaymenMethodController : Controller
     {
         private ShoppingCartEntities db = new ShoppingCartEntities();
 
-        // GET: /Product/
+        // GET: /PaymenMethod/
         public ActionResult Index()
         {
-            var products = db.Products.Include(p => p.Brand).Include(p => p.Category);
-            return View(products.ToList());
+            return View(db.PaymenMethods.ToList());
         }
 
-        // GET: /Product/Details/5
+        // GET: /PaymenMethod/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Product product = db.Products.Find(id);
-            if (product == null)
+            PaymenMethod paymenmethod = db.PaymenMethods.Find(id);
+            if (paymenmethod == null)
             {
                 return HttpNotFound();
             }
-            return View(product);
+            return View(paymenmethod);
         }
 
-        // GET: /Product/Create
+        // GET: /PaymenMethod/Create
         public ActionResult Create()
         {
-            ViewBag.BrandID = new SelectList(db.Brands, "BrandID", "ImageUrl");
-            ViewBag.CategoryID = new SelectList(db.Categories, "CategoryID", "Description");
             return View();
         }
 
-        // POST: /Product/Create
+        // POST: /PaymenMethod/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include="ProductsID,CategoryID,BrandID,ImageUrl,Name,Description,Price,SalePrice,Detail,DateCreated,SortOrder,IsPublished")] Product product)
+        public ActionResult Create([Bind(Include="PaymenMethodsID,Name")] PaymenMethod paymenmethod)
         {
             if (ModelState.IsValid)
             {
-                db.Products.Add(product);
+                db.PaymenMethods.Add(paymenmethod);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.BrandID = new SelectList(db.Brands, "BrandID", "ImageUrl", product.BrandID);
-            ViewBag.CategoryID = new SelectList(db.Categories, "CategoryID", "Name", product.CategoryID);
-            return View(product);
+            return View(paymenmethod);
         }
 
-        // GET: /Product/Edit/5
+        // GET: /PaymenMethod/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Product product = db.Products.Find(id);
-            if (product == null)
+            PaymenMethod paymenmethod = db.PaymenMethods.Find(id);
+            if (paymenmethod == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.BrandID = new SelectList(db.Brands, "BrandID", "ImageUrl", product.BrandID);
-            ViewBag.CategoryID = new SelectList(db.Categories, "CategoryID", "Name", product.CategoryID);
-            return View(product);
+            return View(paymenmethod);
         }
 
-        // POST: /Product/Edit/5
+        // POST: /PaymenMethod/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include="ProductsID,CategoryID,BrandID,ImageUrl,Name,Description,Price,SalePrice,Detail,DateCreated,SortOrder,IsPublished")] Product product)
+        public ActionResult Edit([Bind(Include="PaymenMethodsID,Name")] PaymenMethod paymenmethod)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(product).State = EntityState.Modified;
+                db.Entry(paymenmethod).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.BrandID = new SelectList(db.Brands, "BrandID", "ImageUrl", product.BrandID);
-            ViewBag.CategoryID = new SelectList(db.Categories, "CategoryID", "Description", product.CategoryID);
-            return View(product);
+            return View(paymenmethod);
         }
 
-        // GET: /Product/Delete/5
+        // GET: /PaymenMethod/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Product product = db.Products.Find(id);
-            if (product == null)
+            PaymenMethod paymenmethod = db.PaymenMethods.Find(id);
+            if (paymenmethod == null)
             {
                 return HttpNotFound();
             }
-            return View(product);
+            return View(paymenmethod);
         }
 
-        // POST: /Product/Delete/5
+        // POST: /PaymenMethod/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Product product = db.Products.Find(id);
-            db.Products.Remove(product);
+            PaymenMethod paymenmethod = db.PaymenMethods.Find(id);
+            db.PaymenMethods.Remove(paymenmethod);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

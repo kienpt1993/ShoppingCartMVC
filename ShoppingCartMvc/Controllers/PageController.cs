@@ -10,116 +10,107 @@ using ShopingCartEF;
 
 namespace ShoppingCartMvc.Controllers
 {
-    public class ProductController : Controller
+    public class PageController : Controller
     {
         private ShoppingCartEntities db = new ShoppingCartEntities();
 
-        // GET: /Product/
+        // GET: /Page/
         public ActionResult Index()
         {
-            var products = db.Products.Include(p => p.Brand).Include(p => p.Category);
-            return View(products.ToList());
+            return View(db.Pages.ToList());
         }
 
-        // GET: /Product/Details/5
+        // GET: /Page/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Product product = db.Products.Find(id);
-            if (product == null)
+            Page page = db.Pages.Find(id);
+            if (page == null)
             {
                 return HttpNotFound();
             }
-            return View(product);
+            return View(page);
         }
 
-        // GET: /Product/Create
+        // GET: /Page/Create
         public ActionResult Create()
         {
-            ViewBag.BrandID = new SelectList(db.Brands, "BrandID", "ImageUrl");
-            ViewBag.CategoryID = new SelectList(db.Categories, "CategoryID", "Description");
             return View();
         }
 
-        // POST: /Product/Create
+        // POST: /Page/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include="ProductsID,CategoryID,BrandID,ImageUrl,Name,Description,Price,SalePrice,Detail,DateCreated,SortOrder,IsPublished")] Product product)
+        public ActionResult Create([Bind(Include="PageID,Name,Alias,Content")] Page page)
         {
             if (ModelState.IsValid)
             {
-                db.Products.Add(product);
+                db.Pages.Add(page);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.BrandID = new SelectList(db.Brands, "BrandID", "ImageUrl", product.BrandID);
-            ViewBag.CategoryID = new SelectList(db.Categories, "CategoryID", "Name", product.CategoryID);
-            return View(product);
+            return View(page);
         }
 
-        // GET: /Product/Edit/5
+        // GET: /Page/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Product product = db.Products.Find(id);
-            if (product == null)
+            Page page = db.Pages.Find(id);
+            if (page == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.BrandID = new SelectList(db.Brands, "BrandID", "ImageUrl", product.BrandID);
-            ViewBag.CategoryID = new SelectList(db.Categories, "CategoryID", "Name", product.CategoryID);
-            return View(product);
+            return View(page);
         }
 
-        // POST: /Product/Edit/5
+        // POST: /Page/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include="ProductsID,CategoryID,BrandID,ImageUrl,Name,Description,Price,SalePrice,Detail,DateCreated,SortOrder,IsPublished")] Product product)
+        public ActionResult Edit([Bind(Include="PageID,Name,Alias,Content")] Page page)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(product).State = EntityState.Modified;
+                db.Entry(page).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.BrandID = new SelectList(db.Brands, "BrandID", "ImageUrl", product.BrandID);
-            ViewBag.CategoryID = new SelectList(db.Categories, "CategoryID", "Description", product.CategoryID);
-            return View(product);
+            return View(page);
         }
 
-        // GET: /Product/Delete/5
+        // GET: /Page/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Product product = db.Products.Find(id);
-            if (product == null)
+            Page page = db.Pages.Find(id);
+            if (page == null)
             {
                 return HttpNotFound();
             }
-            return View(product);
+            return View(page);
         }
 
-        // POST: /Product/Delete/5
+        // POST: /Page/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Product product = db.Products.Find(id);
-            db.Products.Remove(product);
+            Page page = db.Pages.Find(id);
+            db.Pages.Remove(page);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

@@ -10,116 +10,116 @@ using ShopingCartEF;
 
 namespace ShoppingCartMvc.Controllers
 {
-    public class ProductController : Controller
+    public class OrtherController : Controller
     {
         private ShoppingCartEntities db = new ShoppingCartEntities();
 
-        // GET: /Product/
+        // GET: /Orther/
         public ActionResult Index()
         {
-            var products = db.Products.Include(p => p.Brand).Include(p => p.Category);
-            return View(products.ToList());
+            var orthers = db.Orthers.Include(o => o.Customer).Include(o => o.PaymenMethod);
+            return View(orthers.ToList());
         }
 
-        // GET: /Product/Details/5
+        // GET: /Orther/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Product product = db.Products.Find(id);
-            if (product == null)
+            Orther orther = db.Orthers.Find(id);
+            if (orther == null)
             {
                 return HttpNotFound();
             }
-            return View(product);
+            return View(orther);
         }
 
-        // GET: /Product/Create
+        // GET: /Orther/Create
         public ActionResult Create()
         {
-            ViewBag.BrandID = new SelectList(db.Brands, "BrandID", "ImageUrl");
-            ViewBag.CategoryID = new SelectList(db.Categories, "CategoryID", "Description");
+            ViewBag.CustomerID = new SelectList(db.Customers, "CustomerID", "Name");
+            ViewBag.PaymentMethod = new SelectList(db.PaymenMethods, "PaymenMethodsID", "Name");
             return View();
         }
 
-        // POST: /Product/Create
+        // POST: /Orther/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include="ProductsID,CategoryID,BrandID,ImageUrl,Name,Description,Price,SalePrice,Detail,DateCreated,SortOrder,IsPublished")] Product product)
+        public ActionResult Create([Bind(Include="OrtherID,CustomerID,DateOrdered,DateRicived,ShippingMethod,PaymentMethod,PaymentType,Status,Amout")] Orther orther)
         {
             if (ModelState.IsValid)
             {
-                db.Products.Add(product);
+                db.Orthers.Add(orther);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.BrandID = new SelectList(db.Brands, "BrandID", "ImageUrl", product.BrandID);
-            ViewBag.CategoryID = new SelectList(db.Categories, "CategoryID", "Name", product.CategoryID);
-            return View(product);
+            ViewBag.CustomerID = new SelectList(db.Customers, "CustomerID", "Name", orther.CustomerID);
+            ViewBag.PaymentMethod = new SelectList(db.PaymenMethods, "PaymenMethodsID", "Name", orther.PaymentMethod);
+            return View(orther);
         }
 
-        // GET: /Product/Edit/5
+        // GET: /Orther/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Product product = db.Products.Find(id);
-            if (product == null)
+            Orther orther = db.Orthers.Find(id);
+            if (orther == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.BrandID = new SelectList(db.Brands, "BrandID", "ImageUrl", product.BrandID);
-            ViewBag.CategoryID = new SelectList(db.Categories, "CategoryID", "Name", product.CategoryID);
-            return View(product);
+            ViewBag.CustomerID = new SelectList(db.Customers, "CustomerID", "Name", orther.CustomerID);
+            ViewBag.PaymentMethod = new SelectList(db.PaymenMethods, "PaymenMethodsID", "Name", orther.PaymentMethod);
+            return View(orther);
         }
 
-        // POST: /Product/Edit/5
+        // POST: /Orther/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include="ProductsID,CategoryID,BrandID,ImageUrl,Name,Description,Price,SalePrice,Detail,DateCreated,SortOrder,IsPublished")] Product product)
+        public ActionResult Edit([Bind(Include="OrtherID,CustomerID,DateOrdered,DateRicived,ShippingMethod,PaymentMethod,PaymentType,Status,Amout")] Orther orther)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(product).State = EntityState.Modified;
+                db.Entry(orther).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.BrandID = new SelectList(db.Brands, "BrandID", "ImageUrl", product.BrandID);
-            ViewBag.CategoryID = new SelectList(db.Categories, "CategoryID", "Description", product.CategoryID);
-            return View(product);
+            ViewBag.CustomerID = new SelectList(db.Customers, "CustomerID", "Name", orther.CustomerID);
+            ViewBag.PaymentMethod = new SelectList(db.PaymenMethods, "PaymenMethodsID", "Name", orther.PaymentMethod);
+            return View(orther);
         }
 
-        // GET: /Product/Delete/5
+        // GET: /Orther/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Product product = db.Products.Find(id);
-            if (product == null)
+            Orther orther = db.Orthers.Find(id);
+            if (orther == null)
             {
                 return HttpNotFound();
             }
-            return View(product);
+            return View(orther);
         }
 
-        // POST: /Product/Delete/5
+        // POST: /Orther/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Product product = db.Products.Find(id);
-            db.Products.Remove(product);
+            Orther orther = db.Orthers.Find(id);
+            db.Orthers.Remove(orther);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
