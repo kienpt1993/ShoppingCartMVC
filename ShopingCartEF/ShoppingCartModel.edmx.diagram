@@ -7,7 +7,6 @@
       <Diagram DiagramId="1fd9679b610f4e9eb932e7d1bd5ad11d" Name="Diagram1">
         <EntityTypeShape EntityType="ShoppingCartModel.Band_Product" Width="1.5" PointX="3" PointY="5" IsExpanded="true" />
         <EntityTypeShape EntityType="ShoppingCartModel.Brand" Width="1.5" PointX="0.75" PointY="5" IsExpanded="true" />
-        <EntityTypeShape EntityType="ShoppingCartModel.Category" Width="1.5" PointX="3.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ShoppingCartModel.Customer" Width="1.5" PointX="3.75" PointY="9.125" IsExpanded="true" />
         <EntityTypeShape EntityType="ShoppingCartModel.Image" Width="1.5" PointX="8.25" PointY="5.125" IsExpanded="true" />
         <EntityTypeShape EntityType="ShoppingCartModel.News" Width="1.5" PointX="0.75" PointY="1.75" IsExpanded="true" />
@@ -19,12 +18,13 @@
         <AssociationConnector Association="ShoppingCartModel.FK_Band_Product_Brand" ManuallyRouted="false" />
         <AssociationConnector Association="ShoppingCartModel.FK_Band_Product_Products" ManuallyRouted="false" />
         <AssociationConnector Association="ShoppingCartModel.FK_Products_Brand" ManuallyRouted="false" />
-        <AssociationConnector Association="ShoppingCartModel.FK_Products_Category" ManuallyRouted="false" />
         <AssociationConnector Association="ShoppingCartModel.FK_Orther_Customer" ManuallyRouted="false" />
         <AssociationConnector Association="ShoppingCartModel.FK_Image_Products" ManuallyRouted="false" />
         <AssociationConnector Association="ShoppingCartModel.FK_OrderItem_Orther" ManuallyRouted="false" />
         <AssociationConnector Association="ShoppingCartModel.FK_OrderItem_Producct" ManuallyRouted="false" />
         <AssociationConnector Association="ShoppingCartModel.FK_Orther_PaymenMethods" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="ShoppingCartModel.Category" Width="1.5" PointX="8" PointY="7.375" />
+        <AssociationConnector Association="ShoppingCartModel.FK_Products_Category" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

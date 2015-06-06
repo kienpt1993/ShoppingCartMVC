@@ -14,7 +14,7 @@
           <Property Name="ProductsID" Type="int" Nullable="false" />
           <Property Name="Note" Type="nvarchar" MaxLength="150" />
         </EntityType>
-        <EntityType Name="Brand">
+        <EntityType Name="Brands">
           <Key>
             <PropertyRef Name="BrandID" />
           </Key>
@@ -22,7 +22,7 @@
           <Property Name="ImageUrl" Type="nvarchar" MaxLength="250" />
           <Property Name="Name" Type="nvarchar" MaxLength="150" />
         </EntityType>
-        <EntityType Name="Category">
+        <EntityType Name="Categories">
           <Key>
             <PropertyRef Name="CategoryID" />
           </Key>
@@ -34,7 +34,7 @@
           <Property Name="SortOrder" Type="int" />
           <Property Name="IsPublished" Type="bit" />
         </EntityType>
-        <EntityType Name="Customer">
+        <EntityType Name="Customers">
           <Key>
             <PropertyRef Name="CustomerID" />
           </Key>
@@ -44,7 +44,7 @@
           <Property Name="DOB" Type="varchar" MaxLength="50" />
           <Property Name="Adress" Type="nvarchar" MaxLength="150" />
         </EntityType>
-        <EntityType Name="Image">
+        <EntityType Name="Images">
           <Key>
             <PropertyRef Name="ImageID" />
           </Key>
@@ -59,12 +59,12 @@
           <Property Name="NewsID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ImageUrl" Type="nvarchar" MaxLength="250" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="150" Nullable="false" />
-          <Property Name="CreateDate" Type="date" />
+          <Property Name="CreateDate" Type="datetime" />
           <Property Name="Author" Type="nvarchar" MaxLength="50" />
           <Property Name="Content" Type="nvarchar(max)" />
           <Property Name="Hits" Type="int" />
         </EntityType>
-        <EntityType Name="OrderItem">
+        <EntityType Name="OrderItems">
           <Key>
             <PropertyRef Name="OrtherID" />
             <PropertyRef Name="ProductID" />
@@ -75,21 +75,21 @@
           <Property Name="Price" Type="bigint" />
           <Property Name="Quantily" Type="int" />
         </EntityType>
-        <EntityType Name="Orther">
+        <EntityType Name="Orthers">
           <Key>
             <PropertyRef Name="OrtherID" />
           </Key>
           <Property Name="OrtherID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="CustomerID" Type="int" />
-          <Property Name="DateOrdered" Type="date" />
-          <Property Name="DateRicived" Type="date" />
+          <Property Name="DateOrdered" Type="datetime" />
+          <Property Name="DateRicived" Type="datetime" />
           <Property Name="ShippingMethod" Type="nvarchar" MaxLength="50" />
           <Property Name="PaymentMethod" Type="int" />
           <Property Name="PaymentType" Type="nvarchar" MaxLength="50" />
           <Property Name="Status" Type="nvarchar" MaxLength="150" />
           <Property Name="Amout" Type="bigint" />
         </EntityType>
-        <EntityType Name="Page">
+        <EntityType Name="Pages">
           <Key>
             <PropertyRef Name="PageID" />
           </Key>
@@ -109,7 +109,7 @@
           <Key>
             <PropertyRef Name="ProductsID" />
           </Key>
-          <Property Name="ProductsID" Type="int" Nullable="false" />
+          <Property Name="ProductsID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="CategoryID" Type="int" />
           <Property Name="BrandID" Type="int" />
           <Property Name="ImageUrl" Type="nvarchar" MaxLength="250" />
@@ -118,15 +118,15 @@
           <Property Name="Price" Type="float" Nullable="false" />
           <Property Name="SalePrice" Type="float" />
           <Property Name="Detail" Type="nvarchar(max)" />
-          <Property Name="DateCreated" Type="date" />
+          <Property Name="DateCreated" Type="datetime" />
           <Property Name="SortOrder" Type="int" />
           <Property Name="IsPublished" Type="bit" />
         </EntityType>
         <Association Name="FK_Band_Product_Brand">
-          <End Role="Brand" Type="Self.Brand" Multiplicity="1" />
+          <End Role="Brands" Type="Self.Brands" Multiplicity="1" />
           <End Role="Band_Product" Type="Self.Band_Product" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Brand">
+            <Principal Role="Brands">
               <PropertyRef Name="BrandID" />
             </Principal>
             <Dependent Role="Band_Product">
@@ -148,69 +148,69 @@
         </Association>
         <Association Name="FK_Image_Products">
           <End Role="Products" Type="Self.Products" Multiplicity="0..1" />
-          <End Role="Image" Type="Self.Image" Multiplicity="*" />
+          <End Role="Images" Type="Self.Images" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Products">
               <PropertyRef Name="ProductsID" />
             </Principal>
-            <Dependent Role="Image">
+            <Dependent Role="Images">
               <PropertyRef Name="ProductID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_OrderItem_Orther">
-          <End Role="Orther" Type="Self.Orther" Multiplicity="1" />
-          <End Role="OrderItem" Type="Self.OrderItem" Multiplicity="*" />
+          <End Role="Orthers" Type="Self.Orthers" Multiplicity="1" />
+          <End Role="OrderItems" Type="Self.OrderItems" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Orther">
+            <Principal Role="Orthers">
               <PropertyRef Name="OrtherID" />
             </Principal>
-            <Dependent Role="OrderItem">
+            <Dependent Role="OrderItems">
               <PropertyRef Name="OrtherID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_OrderItem_Producct">
           <End Role="Products" Type="Self.Products" Multiplicity="1" />
-          <End Role="OrderItem" Type="Self.OrderItem" Multiplicity="*" />
+          <End Role="OrderItems" Type="Self.OrderItems" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Products">
               <PropertyRef Name="ProductsID" />
             </Principal>
-            <Dependent Role="OrderItem">
+            <Dependent Role="OrderItems">
               <PropertyRef Name="ProductID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Orther_Customer">
-          <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
-          <End Role="Orther" Type="Self.Orther" Multiplicity="*" />
+          <End Role="Customers" Type="Self.Customers" Multiplicity="0..1" />
+          <End Role="Orthers" Type="Self.Orthers" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Customer">
+            <Principal Role="Customers">
               <PropertyRef Name="CustomerID" />
             </Principal>
-            <Dependent Role="Orther">
+            <Dependent Role="Orthers">
               <PropertyRef Name="CustomerID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Orther_PaymenMethods">
           <End Role="PaymenMethods" Type="Self.PaymenMethods" Multiplicity="0..1" />
-          <End Role="Orther" Type="Self.Orther" Multiplicity="*" />
+          <End Role="Orthers" Type="Self.Orthers" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="PaymenMethods">
               <PropertyRef Name="PaymenMethodsID" />
             </Principal>
-            <Dependent Role="Orther">
+            <Dependent Role="Orthers">
               <PropertyRef Name="PaymentMethod" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Products_Brand">
-          <End Role="Brand" Type="Self.Brand" Multiplicity="0..1" />
+          <End Role="Brands" Type="Self.Brands" Multiplicity="0..1" />
           <End Role="Products" Type="Self.Products" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Brand">
+            <Principal Role="Brands">
               <PropertyRef Name="BrandID" />
             </Principal>
             <Dependent Role="Products">
@@ -219,10 +219,10 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Products_Category">
-          <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
+          <End Role="Categories" Type="Self.Categories" Multiplicity="0..1" />
           <End Role="Products" Type="Self.Products" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Category">
+            <Principal Role="Categories">
               <PropertyRef Name="CategoryID" />
             </Principal>
             <Dependent Role="Products">
@@ -232,18 +232,18 @@
         </Association>
         <EntityContainer Name="ShoppingCartModelStoreContainer">
           <EntitySet Name="Band_Product" EntityType="Self.Band_Product" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Brand" EntityType="Self.Brand" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Image" EntityType="Self.Image" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Brands" EntityType="Self.Brands" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Categories" EntityType="Self.Categories" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Customers" EntityType="Self.Customers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Images" EntityType="Self.Images" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="News" EntityType="Self.News" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="OrderItem" EntityType="Self.OrderItem" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Orther" EntityType="Self.Orther" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Page" EntityType="Self.Page" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OrderItems" EntityType="Self.OrderItems" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Orthers" EntityType="Self.Orthers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Pages" EntityType="Self.Pages" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PaymenMethods" EntityType="Self.PaymenMethods" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Products" EntityType="Self.Products" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Band_Product_Brand" Association="Self.FK_Band_Product_Brand">
-            <End Role="Brand" EntitySet="Brand" />
+            <End Role="Brands" EntitySet="Brands" />
             <End Role="Band_Product" EntitySet="Band_Product" />
           </AssociationSet>
           <AssociationSet Name="FK_Band_Product_Products" Association="Self.FK_Band_Product_Products">
@@ -252,30 +252,30 @@
           </AssociationSet>
           <AssociationSet Name="FK_Image_Products" Association="Self.FK_Image_Products">
             <End Role="Products" EntitySet="Products" />
-            <End Role="Image" EntitySet="Image" />
+            <End Role="Images" EntitySet="Images" />
           </AssociationSet>
           <AssociationSet Name="FK_OrderItem_Orther" Association="Self.FK_OrderItem_Orther">
-            <End Role="Orther" EntitySet="Orther" />
-            <End Role="OrderItem" EntitySet="OrderItem" />
+            <End Role="Orthers" EntitySet="Orthers" />
+            <End Role="OrderItems" EntitySet="OrderItems" />
           </AssociationSet>
           <AssociationSet Name="FK_OrderItem_Producct" Association="Self.FK_OrderItem_Producct">
             <End Role="Products" EntitySet="Products" />
-            <End Role="OrderItem" EntitySet="OrderItem" />
+            <End Role="OrderItems" EntitySet="OrderItems" />
           </AssociationSet>
           <AssociationSet Name="FK_Orther_Customer" Association="Self.FK_Orther_Customer">
-            <End Role="Customer" EntitySet="Customer" />
-            <End Role="Orther" EntitySet="Orther" />
+            <End Role="Customers" EntitySet="Customers" />
+            <End Role="Orthers" EntitySet="Orthers" />
           </AssociationSet>
           <AssociationSet Name="FK_Orther_PaymenMethods" Association="Self.FK_Orther_PaymenMethods">
             <End Role="PaymenMethods" EntitySet="PaymenMethods" />
-            <End Role="Orther" EntitySet="Orther" />
+            <End Role="Orthers" EntitySet="Orthers" />
           </AssociationSet>
           <AssociationSet Name="FK_Products_Brand" Association="Self.FK_Products_Brand">
-            <End Role="Brand" EntitySet="Brand" />
+            <End Role="Brands" EntitySet="Brands" />
             <End Role="Products" EntitySet="Products" />
           </AssociationSet>
           <AssociationSet Name="FK_Products_Category" Association="Self.FK_Products_Category">
-            <End Role="Category" EntitySet="Category" />
+            <End Role="Categories" EntitySet="Categories" />
             <End Role="Products" EntitySet="Products" />
           </AssociationSet>
         </EntityContainer>
@@ -304,20 +304,6 @@
           <NavigationProperty Name="Band_Product" Relationship="Self.FK_Band_Product_Brand" FromRole="Brand" ToRole="Band_Product" />
           <NavigationProperty Name="Products" Relationship="Self.FK_Products_Brand" FromRole="Brand" ToRole="Products" />
         </EntityType>
-        <EntityType Name="Category">
-          <Key>
-            <PropertyRef Name="CategoryID" />
-          </Key>
-          <Property Name="CategoryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="Description" Type="String" MaxLength="400" FixedLength="false" Unicode="true" />
-          <Property Name="ImageUrl" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="ParentID" Type="Int32" />
-          <Property Name="SortOrder" Type="Int32" />
-          <Property Name="IsPublished" Type="Boolean" />
-          <NavigationProperty Name="Products" Relationship="Self.FK_Products_Category" FromRole="Category" ToRole="Products" />
-          <Property Name="test" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-        </EntityType>
         <EntityType Name="Customer">
           <Key>
             <PropertyRef Name="CustomerID" />
@@ -345,7 +331,7 @@
           <Property Name="NewsID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ImageUrl" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Name" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="CreateDate" Type="DateTime" Precision="0" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
           <Property Name="Author" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Content" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Hits" Type="Int32" />
@@ -369,8 +355,8 @@
           </Key>
           <Property Name="OrtherID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="CustomerID" Type="Int32" />
-          <Property Name="DateOrdered" Type="DateTime" Precision="0" />
-          <Property Name="DateRicived" Type="DateTime" Precision="0" />
+          <Property Name="DateOrdered" Type="DateTime" Precision="3" />
+          <Property Name="DateRicived" Type="DateTime" Precision="3" />
           <Property Name="ShippingMethod" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="PaymentMethod" Type="Int32" />
           <Property Name="PaymentType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
@@ -410,14 +396,14 @@
           <Property Name="Price" Type="Double" Nullable="false" />
           <Property Name="SalePrice" Type="Double" />
           <Property Name="Detail" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="DateCreated" Type="DateTime" Precision="0" />
+          <Property Name="DateCreated" Type="DateTime" Precision="3" />
           <Property Name="SortOrder" Type="Int32" />
           <Property Name="IsPublished" Type="Boolean" />
           <NavigationProperty Name="Band_Product" Relationship="Self.FK_Band_Product_Products" FromRole="Products" ToRole="Band_Product" />
           <NavigationProperty Name="Brand" Relationship="Self.FK_Products_Brand" FromRole="Products" ToRole="Brand" />
-          <NavigationProperty Name="Category" Relationship="Self.FK_Products_Category" FromRole="Products" ToRole="Category" />
           <NavigationProperty Name="Images" Relationship="Self.FK_Image_Products" FromRole="Products" ToRole="Image" />
           <NavigationProperty Name="OrderItems" Relationship="Self.FK_OrderItem_Producct" FromRole="Products" ToRole="OrderItem" />
+          <NavigationProperty Name="Category" Relationship="ShoppingCartModel.FK_Products_Category" FromRole="Product" ToRole="Category" />
         </EntityType>
         <Association Name="FK_Band_Product_Brand">
           <End Role="Brand" Type="Self.Brand" Multiplicity="1" />
@@ -452,18 +438,6 @@
             </Principal>
             <Dependent Role="Products">
               <PropertyRef Name="BrandID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Products_Category">
-          <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
-          <End Role="Products" Type="Self.Product" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Category">
-              <PropertyRef Name="CategoryID" />
-            </Principal>
-            <Dependent Role="Products">
-              <PropertyRef Name="CategoryID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -530,7 +504,6 @@
         <EntityContainer Name="ShoppingCartEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Band_Product" EntityType="Self.Band_Product" />
           <EntitySet Name="Brands" EntityType="Self.Brand" />
-          <EntitySet Name="Categories" EntityType="Self.Category" />
           <EntitySet Name="Customers" EntityType="Self.Customer" />
           <EntitySet Name="Images" EntityType="Self.Image" />
           <EntitySet Name="News" EntityType="Self.News" />
@@ -549,10 +522,6 @@
           </AssociationSet>
           <AssociationSet Name="FK_Products_Brand" Association="Self.FK_Products_Brand">
             <End Role="Brand" EntitySet="Brands" />
-            <End Role="Products" EntitySet="Products" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Products_Category" Association="Self.FK_Products_Category">
-            <End Role="Category" EntitySet="Categories" />
             <End Role="Products" EntitySet="Products" />
           </AssociationSet>
           <AssociationSet Name="FK_Orther_Customer" Association="Self.FK_Orther_Customer">
@@ -575,142 +544,171 @@
             <End Role="PaymenMethods" EntitySet="PaymenMethods" />
             <End Role="Orther" EntitySet="Orthers" />
           </AssociationSet>
+          <EntitySet Name="Categories" EntityType="ShoppingCartModel.Category" />
+          <AssociationSet Name="FK_Products_Category" Association="ShoppingCartModel.FK_Products_Category">
+            <End Role="Category" EntitySet="Categories" />
+            <End Role="Product" EntitySet="Products" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="CategoryID" />
+          </Key>
+          <Property Name="CategoryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="400" FixedLength="false" Unicode="true" />
+          <Property Name="ImageUrl" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="ParentID" Type="Int32" />
+          <Property Name="SortOrder" Type="Int32" />
+          <Property Name="IsPublished" Type="Boolean" />
+          <NavigationProperty Name="Products" Relationship="ShoppingCartModel.FK_Products_Category" FromRole="Category" ToRole="Product" />
+        </EntityType>
+        <Association Name="FK_Products_Category">
+          <End Type="ShoppingCartModel.Category" Role="Category" Multiplicity="0..1" />
+          <End Type="ShoppingCartModel.Product" Role="Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="CategoryID" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="CategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
-      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="ShoppingCartModelStoreContainer" CdmEntityContainer="ShoppingCartEntities">
-          <EntitySetMapping Name="Band_Product">
-            <EntityTypeMapping TypeName="ShoppingCartModel.Band_Product">
-              <MappingFragment StoreEntitySet="Band_Product">
-                <ScalarProperty Name="BrandID" ColumnName="BrandID" />
-                <ScalarProperty Name="ProductsID" ColumnName="ProductsID" />
-                <ScalarProperty Name="Note" ColumnName="Note" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Brands">
-            <EntityTypeMapping TypeName="ShoppingCartModel.Brand">
-              <MappingFragment StoreEntitySet="Brand">
-                <ScalarProperty Name="BrandID" ColumnName="BrandID" />
-                <ScalarProperty Name="ImageUrl" ColumnName="ImageUrl" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ShoppingCartModelStoreContainer" CdmEntityContainer="ShoppingCartEntities">
+    <EntitySetMapping Name="Band_Product">
+      <EntityTypeMapping TypeName="IsTypeOf(ShoppingCartModel.Band_Product)">
+        <MappingFragment StoreEntitySet="Band_Product">
+          <ScalarProperty Name="BrandID" ColumnName="BrandID" />
+          <ScalarProperty Name="ProductsID" ColumnName="ProductsID" />
+          <ScalarProperty Name="Note" ColumnName="Note" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Brands">
+      <EntityTypeMapping TypeName="IsTypeOf(ShoppingCartModel.Brand)">
+        <MappingFragment StoreEntitySet="Brands">
+          <ScalarProperty Name="BrandID" ColumnName="BrandID" />
+          <ScalarProperty Name="ImageUrl" ColumnName="ImageUrl" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Customers">
+      <EntityTypeMapping TypeName="IsTypeOf(ShoppingCartModel.Customer)">
+        <MappingFragment StoreEntitySet="Customers">
+          <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="DOB" ColumnName="DOB" />
+          <ScalarProperty Name="Adress" ColumnName="Adress" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Images">
+      <EntityTypeMapping TypeName="IsTypeOf(ShoppingCartModel.Image)">
+        <MappingFragment StoreEntitySet="Images">
+          <ScalarProperty Name="ImageID" ColumnName="ImageID" />
+          <ScalarProperty Name="ImageUrl" ColumnName="ImageUrl" />
+          <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="News">
+      <EntityTypeMapping TypeName="IsTypeOf(ShoppingCartModel.News)">
+        <MappingFragment StoreEntitySet="News">
+          <ScalarProperty Name="NewsID" ColumnName="NewsID" />
+          <ScalarProperty Name="ImageUrl" ColumnName="ImageUrl" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="Author" ColumnName="Author" />
+          <ScalarProperty Name="Content" ColumnName="Content" />
+          <ScalarProperty Name="Hits" ColumnName="Hits" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OrderItems">
+      <EntityTypeMapping TypeName="IsTypeOf(ShoppingCartModel.OrderItem)">
+        <MappingFragment StoreEntitySet="OrderItems">
+          <ScalarProperty Name="OrtherID" ColumnName="OrtherID" />
+          <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="Quantily" ColumnName="Quantily" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Orthers">
+      <EntityTypeMapping TypeName="IsTypeOf(ShoppingCartModel.Orther)">
+        <MappingFragment StoreEntitySet="Orthers">
+          <ScalarProperty Name="OrtherID" ColumnName="OrtherID" />
+          <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+          <ScalarProperty Name="DateOrdered" ColumnName="DateOrdered" />
+          <ScalarProperty Name="DateRicived" ColumnName="DateRicived" />
+          <ScalarProperty Name="ShippingMethod" ColumnName="ShippingMethod" />
+          <ScalarProperty Name="PaymentMethod" ColumnName="PaymentMethod" />
+          <ScalarProperty Name="PaymentType" ColumnName="PaymentType" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Amout" ColumnName="Amout" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Pages">
+      <EntityTypeMapping TypeName="IsTypeOf(ShoppingCartModel.Page)">
+        <MappingFragment StoreEntitySet="Pages">
+          <ScalarProperty Name="PageID" ColumnName="PageID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Alias" ColumnName="Alias" />
+          <ScalarProperty Name="Content" ColumnName="Content" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PaymenMethods">
+      <EntityTypeMapping TypeName="IsTypeOf(ShoppingCartModel.PaymenMethod)">
+        <MappingFragment StoreEntitySet="PaymenMethods">
+          <ScalarProperty Name="PaymenMethodsID" ColumnName="PaymenMethodsID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Products">
+      <EntityTypeMapping TypeName="IsTypeOf(ShoppingCartModel.Product)">
+        <MappingFragment StoreEntitySet="Products">
+          <ScalarProperty Name="ProductsID" ColumnName="ProductsID" />
+          <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+          <ScalarProperty Name="BrandID" ColumnName="BrandID" />
+          <ScalarProperty Name="ImageUrl" ColumnName="ImageUrl" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="SalePrice" ColumnName="SalePrice" />
+          <ScalarProperty Name="Detail" ColumnName="Detail" />
+          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+          <ScalarProperty Name="SortOrder" ColumnName="SortOrder" />
+          <ScalarProperty Name="IsPublished" ColumnName="IsPublished" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
           <EntitySetMapping Name="Categories">
             <EntityTypeMapping TypeName="ShoppingCartModel.Category">
-              <MappingFragment StoreEntitySet="Category">
-                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="ImageUrl" ColumnName="ImageUrl" />
+              <MappingFragment StoreEntitySet="Categories">
+                <ScalarProperty Name="IsPublished" ColumnName="IsPublished" />
+                <ScalarProperty Name="SortOrder" ColumnName="SortOrder" />
                 <ScalarProperty Name="ParentID" ColumnName="ParentID" />
-                <ScalarProperty Name="SortOrder" ColumnName="SortOrder" />
-                <ScalarProperty Name="IsPublished" ColumnName="IsPublished" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Customers">
-            <EntityTypeMapping TypeName="ShoppingCartModel.Customer">
-              <MappingFragment StoreEntitySet="Customer">
-                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Phone" ColumnName="Phone" />
-                <ScalarProperty Name="DOB" ColumnName="DOB" />
-                <ScalarProperty Name="Adress" ColumnName="Adress" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Images">
-            <EntityTypeMapping TypeName="ShoppingCartModel.Image">
-              <MappingFragment StoreEntitySet="Image">
-                <ScalarProperty Name="ImageID" ColumnName="ImageID" />
                 <ScalarProperty Name="ImageUrl" ColumnName="ImageUrl" />
-                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="News">
-            <EntityTypeMapping TypeName="ShoppingCartModel.News">
-              <MappingFragment StoreEntitySet="News">
-                <ScalarProperty Name="NewsID" ColumnName="NewsID" />
-                <ScalarProperty Name="ImageUrl" ColumnName="ImageUrl" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
-                <ScalarProperty Name="Author" ColumnName="Author" />
-                <ScalarProperty Name="Content" ColumnName="Content" />
-                <ScalarProperty Name="Hits" ColumnName="Hits" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="OrderItems">
-            <EntityTypeMapping TypeName="ShoppingCartModel.OrderItem">
-              <MappingFragment StoreEntitySet="OrderItem">
-                <ScalarProperty Name="OrtherID" ColumnName="OrtherID" />
-                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Price" ColumnName="Price" />
-                <ScalarProperty Name="Quantily" ColumnName="Quantily" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Orthers">
-            <EntityTypeMapping TypeName="ShoppingCartModel.Orther">
-              <MappingFragment StoreEntitySet="Orther">
-                <ScalarProperty Name="OrtherID" ColumnName="OrtherID" />
-                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
-                <ScalarProperty Name="DateOrdered" ColumnName="DateOrdered" />
-                <ScalarProperty Name="DateRicived" ColumnName="DateRicived" />
-                <ScalarProperty Name="ShippingMethod" ColumnName="ShippingMethod" />
-                <ScalarProperty Name="PaymentMethod" ColumnName="PaymentMethod" />
-                <ScalarProperty Name="PaymentType" ColumnName="PaymentType" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="Amout" ColumnName="Amout" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Pages">
-            <EntityTypeMapping TypeName="ShoppingCartModel.Page">
-              <MappingFragment StoreEntitySet="Page">
-                <ScalarProperty Name="PageID" ColumnName="PageID" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Alias" ColumnName="Alias" />
-                <ScalarProperty Name="Content" ColumnName="Content" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="PaymenMethods">
-            <EntityTypeMapping TypeName="ShoppingCartModel.PaymenMethod">
-              <MappingFragment StoreEntitySet="PaymenMethods">
-                <ScalarProperty Name="PaymenMethodsID" ColumnName="PaymenMethodsID" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Products">
-            <EntityTypeMapping TypeName="ShoppingCartModel.Product">
-              <MappingFragment StoreEntitySet="Products">
-                <ScalarProperty Name="ProductsID" ColumnName="ProductsID" />
-                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
-                <ScalarProperty Name="BrandID" ColumnName="BrandID" />
-                <ScalarProperty Name="ImageUrl" ColumnName="ImageUrl" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="Price" ColumnName="Price" />
-                <ScalarProperty Name="SalePrice" ColumnName="SalePrice" />
-                <ScalarProperty Name="Detail" ColumnName="Detail" />
-                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
-                <ScalarProperty Name="SortOrder" ColumnName="SortOrder" />
-                <ScalarProperty Name="IsPublished" ColumnName="IsPublished" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-        </EntityContainerMapping>
-      </Mapping>
-    </edmx:Mappings>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
   </edmx:Runtime>
   <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
   <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
@@ -724,7 +722,7 @@
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
         <DesignerProperty Name="EnablePluralization" Value="true" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
-        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
       </DesignerInfoPropertySet>
     </Options>

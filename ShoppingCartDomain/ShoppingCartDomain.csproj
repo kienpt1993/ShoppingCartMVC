@@ -51,7 +51,6 @@
     <Compile Include="BLL\OrderItemBLL.cs" />
     <Compile Include="BLL\OrderBLL.cs" />
     <Compile Include="BLL\ProductBLL.cs" />
-    <Compile Include="Class1.cs" />
     <Compile Include="DAL\DBExecute.cs" />
     <Compile Include="DAL\SQLExecute.cs" />
     <Compile Include="Entities\Brands.cs" />

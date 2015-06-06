@@ -26,7 +26,6 @@ namespace ShopingCartEF
         public Nullable<int> ParentID { get; set; }
         public Nullable<int> SortOrder { get; set; }
         public Nullable<bool> IsPublished { get; set; }
-        public string test { get; set; }
     
         public virtual ICollection<Product> Products { get; set; }
     }
