@@ -36,8 +36,8 @@ namespace ShopingCartEF
     
         public virtual ICollection<Band_Product> Band_Product { get; set; }
         public virtual Brand Brand { get; set; }
+        public virtual Category Category { get; set; }
         public virtual ICollection<Image> Images { get; set; }
         public virtual ICollection<OrderItem> OrderItems { get; set; }
-        public virtual Category Category { get; set; }
     }
 }

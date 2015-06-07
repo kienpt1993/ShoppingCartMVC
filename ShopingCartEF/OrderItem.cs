@@ -20,7 +20,7 @@ namespace ShopingCartEF
         public Nullable<long> Price { get; set; }
         public Nullable<int> Quantily { get; set; }
     
-        public virtual Orther Orther { get; set; }
         public virtual Product Product { get; set; }
+        public virtual Orther Orther { get; set; }
     }
 }

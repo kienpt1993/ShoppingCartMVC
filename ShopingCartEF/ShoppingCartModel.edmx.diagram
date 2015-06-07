@@ -5,26 +5,26 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="1fd9679b610f4e9eb932e7d1bd5ad11d" Name="Diagram1">
-        <EntityTypeShape EntityType="ShoppingCartModel.Band_Product" Width="1.5" PointX="3" PointY="5" IsExpanded="true" />
-        <EntityTypeShape EntityType="ShoppingCartModel.Brand" Width="1.5" PointX="0.75" PointY="5" IsExpanded="true" />
-        <EntityTypeShape EntityType="ShoppingCartModel.Customer" Width="1.5" PointX="3.75" PointY="9.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="ShoppingCartModel.Image" Width="1.5" PointX="8.25" PointY="5.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="ShoppingCartModel.News" Width="1.5" PointX="0.75" PointY="1.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="ShoppingCartModel.OrderItem" Width="1.5" PointX="8.25" PointY="1.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="ShoppingCartModel.Orther" Width="1.5" PointX="6" PointY="9.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="ShoppingCartModel.Page" Width="1.5" PointX="0.75" PointY="8.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="ShoppingCartModel.PaymenMethod" Width="1.5" PointX="3.75" PointY="12" IsExpanded="true" />
-        <EntityTypeShape EntityType="ShoppingCartModel.Product" Width="1.5" PointX="6" PointY="3.875" IsExpanded="true" />
-        <AssociationConnector Association="ShoppingCartModel.FK_Band_Product_Brand" ManuallyRouted="false" />
-        <AssociationConnector Association="ShoppingCartModel.FK_Band_Product_Products" ManuallyRouted="false" />
-        <AssociationConnector Association="ShoppingCartModel.FK_Products_Brand" ManuallyRouted="false" />
-        <AssociationConnector Association="ShoppingCartModel.FK_Orther_Customer" ManuallyRouted="false" />
-        <AssociationConnector Association="ShoppingCartModel.FK_Image_Products" ManuallyRouted="false" />
-        <AssociationConnector Association="ShoppingCartModel.FK_OrderItem_Orther" ManuallyRouted="false" />
-        <AssociationConnector Association="ShoppingCartModel.FK_OrderItem_Producct" ManuallyRouted="false" />
-        <AssociationConnector Association="ShoppingCartModel.FK_Orther_PaymenMethods" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="ShoppingCartModel.Category" Width="1.5" PointX="8" PointY="7.375" />
+        <EntityTypeShape EntityType="ShoppingCartModel.Band_Product" Width="1.5" PointX="3" PointY="5" />
+        <EntityTypeShape EntityType="ShoppingCartModel.Brand" Width="1.5" PointX="0.75" PointY="5" />
+        <EntityTypeShape EntityType="ShoppingCartModel.Category" Width="1.5" PointX="3.75" PointY="0.75" />
+        <EntityTypeShape EntityType="ShoppingCartModel.Customer" Width="1.5" PointX="3.75" PointY="12.875" />
+        <EntityTypeShape EntityType="ShoppingCartModel.Image" Width="1.5" PointX="8.25" PointY="8.25" />
+        <EntityTypeShape EntityType="ShoppingCartModel.News" Width="1.5" PointX="0.75" PointY="1.75" />
+        <EntityTypeShape EntityType="ShoppingCartModel.OrderItem" Width="1.5" PointX="8.25" PointY="4.875" />
+        <EntityTypeShape EntityType="ShoppingCartModel.Page" Width="1.5" PointX="0.75" PointY="8.75" />
+        <EntityTypeShape EntityType="ShoppingCartModel.PaymenMethod" Width="1.5" PointX="3.75" PointY="10.625" />
+        <EntityTypeShape EntityType="ShoppingCartModel.Product" Width="1.5" PointX="6" PointY="3.875" />
+        <AssociationConnector Association="ShoppingCartModel.FK_Band_Product_Brand" />
+        <AssociationConnector Association="ShoppingCartModel.FK_Band_Product_Products" />
+        <AssociationConnector Association="ShoppingCartModel.FK_Products_Brand" />
         <AssociationConnector Association="ShoppingCartModel.FK_Products_Category" />
+        <AssociationConnector Association="ShoppingCartModel.FK_Image_Products" />
+        <AssociationConnector Association="ShoppingCartModel.FK_OrderItem_Producct" />
+        <EntityTypeShape EntityType="ShoppingCartModel.Orther" Width="1.5" PointX="6" PointY="11.375" />
+        <AssociationConnector Association="ShoppingCartModel.FK_Orther_Customer" />
+        <AssociationConnector Association="ShoppingCartModel.FK_OrderItem_Orther" />
+        <AssociationConnector Association="ShoppingCartModel.FK_Orther_PaymenMethods" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

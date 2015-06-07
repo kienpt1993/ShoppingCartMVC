@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Owin.Security;
 using ShoppingCartMvc.Models;
+using ShopingCartEF;
 
 namespace ShoppingCartMvc.Controllers
 {
@@ -404,5 +405,6 @@ namespace ShoppingCartMvc.Controllers
             }
         }
         #endregion
+       
     }
 }

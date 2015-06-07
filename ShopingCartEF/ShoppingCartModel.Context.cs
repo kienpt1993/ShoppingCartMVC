@@ -27,14 +27,14 @@ namespace ShopingCartEF
     
         public virtual DbSet<Band_Product> Band_Product { get; set; }
         public virtual DbSet<Brand> Brands { get; set; }
+        public virtual DbSet<Category> Categories { get; set; }
         public virtual DbSet<Customer> Customers { get; set; }
         public virtual DbSet<Image> Images { get; set; }
         public virtual DbSet<News> News { get; set; }
         public virtual DbSet<OrderItem> OrderItems { get; set; }
-        public virtual DbSet<Orther> Orthers { get; set; }
         public virtual DbSet<Page> Pages { get; set; }
         public virtual DbSet<PaymenMethod> PaymenMethods { get; set; }
         public virtual DbSet<Product> Products { get; set; }
-        public virtual DbSet<Category> Categories { get; set; }
+        public virtual DbSet<Orther> Orthers { get; set; }
     }
 }

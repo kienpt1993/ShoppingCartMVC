@@ -20,7 +20,21 @@ namespace ShoppingCartMvc.Controllers
             var products = db.Products.Include(p => p.Brand).Include(p => p.Category);
             return View(products.ToList());
         }
+        public ActionResult Category(int?id )
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Category cate = db.Categories.Find(id);
+            if (cate == null)
+            {
+                return HttpNotFound();
+            }
 
+            var model = db.Products.Where(x => x.CategoryID == id);
+            return View(model);
+        }
         // GET: /Product/Details/5
         public ActionResult Details(int? id)
         {
@@ -33,7 +47,8 @@ namespace ShoppingCartMvc.Controllers
             {
                 return HttpNotFound();
             }
-            return View(product);
+            var model = db.Products.Find(id);
+            return View(model);
         }
 
         // GET: /Product/Create

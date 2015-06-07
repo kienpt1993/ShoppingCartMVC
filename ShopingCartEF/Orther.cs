@@ -27,7 +27,7 @@ namespace ShopingCartEF
         public Nullable<int> PaymentMethod { get; set; }
         public string PaymentType { get; set; }
         public string Status { get; set; }
-        public Nullable<long> Amout { get; set; }
+        public Nullable<double> Amout { get; set; }
     
         public virtual Customer Customer { get; set; }
         public virtual ICollection<OrderItem> OrderItems { get; set; }

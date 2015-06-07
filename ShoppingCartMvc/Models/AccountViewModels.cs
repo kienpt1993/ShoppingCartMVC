@@ -46,7 +46,7 @@ namespace ShoppingCartMvc.Models
     public class RegisterViewModel
     {
         [Required]
-        [Display(Name = "User name")]
+        [Display(Name = "UserName")]
         public string UserName { get; set; }
 
         [Required]
@@ -56,7 +56,7 @@ namespace ShoppingCartMvc.Models
         public string Password { get; set; }
 
         [DataType(DataType.Password)]
-        [Display(Name = "Confirm password")]
+        [Display(Name = "Confirmpassword")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
     }
