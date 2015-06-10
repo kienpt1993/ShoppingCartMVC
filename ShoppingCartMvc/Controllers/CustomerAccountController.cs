@@ -18,12 +18,18 @@ namespace ShoppingCartMvc.Controllers
         // Action nay chi hien thi, khong xu ly gi ca
         public ActionResult MyRegister()
         {
-            return View(new Customer { });
-        }            
+            // kiem tra dang nhap ahay chua
+            if (Session["UserName"] == null)
+            {
+                return View(new Customer { });
+            }
+            return RedirectToAction("Index", "Home");
+          
+        }
         // Action nayxu ly, khong hien thi
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult MyRegister(Customer customer)   
+        public ActionResult MyRegister(Customer customer)
         {
             if (ModelState.IsValid)
             {
@@ -34,9 +40,50 @@ namespace ShoppingCartMvc.Controllers
 
                 }
             }
-            // xong roi thi quay ve trang khac - login chang han
+
             // If we got this far, something failed, redisplay form
             return RedirectToAction("Index");
         }
-	}
+        private ActionResult RedirectToLocal(string returnUrl)
+        {
+            if (Url.IsLocalUrl(returnUrl))
+            {
+                return Redirect(returnUrl);
+            }
+            else
+            {
+                return RedirectToAction("Index", "Home");
+            }
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult MyLogin(Customer cus, string returnUrl)
+        {
+            using (ShoppingCartEntities db = new ShoppingCartEntities())
+            {
+                var v = db.Customers.Where(a => a.Email.Equals(cus.Email) && a.Password.Equals(cus.Password)).FirstOrDefault();
+                if (v != null)
+                {
+                    Session["UserName"] = v.Name.ToString();
+                    Session["Login"] = true;
+                    return RedirectToLocal(returnUrl);
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Invalid username or password.");
+                }
+            }
+
+            return View(cus);
+           
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken] // neu khong muon thi bo dong nay di, bo luon trong view , de thi phai de ca 2
+        public ActionResult MyLogout()
+        {
+            Session.Abandon();
+            return RedirectToAction("Index","Home");
+        }
+
+    }
 }

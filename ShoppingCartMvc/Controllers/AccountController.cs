@@ -320,6 +320,28 @@ namespace ShoppingCartMvc.Controllers
             base.Dispose(disposing);
         }
 
+        [HttpPost]      
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> MyLogin(Customer model, string returnUrl)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = await UserManager.FindAsync(model.Name, model.Password);
+                if (user != null)
+                {
+                 
+                    return RedirectToLocal(returnUrl);
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Invalid username or password.");
+                }
+            }
+
+            // If we got this far, something failed, redisplay form
+            return View(model);
+        }
+
         #region Helpers
         // Used for XSRF protection when adding external logins
         private const string XsrfKey = "XsrfId";

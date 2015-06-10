@@ -401,6 +401,8 @@
     <Content Include="Views\Product\Category.cshtml" />
     <Content Include="Views\Product\Details.cshtml" />
     <Content Include="Views\CustomerAccount\MyRegister.cshtml" />
+    <Content Include="Views\CustomerAccount\MyLogin.cshtml" />
+    <Content Include="Views\Shared\_MyLoginPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

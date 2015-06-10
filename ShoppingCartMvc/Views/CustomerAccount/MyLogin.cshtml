@@ -11,7 +11,7 @@
                 <div class="login-form">
                     <!--login form-->
                     <h2>Thông tin đăng nhập</h2>
-                    @using (Html.BeginForm("MyLogin", "CustomerAccount", FormMethod.Post))
+                    @using (Html.BeginForm("MyRegister", "CustomerAccount", FormMethod.Post))
                     {
                         @Html.HiddenFor(model => model.Phone)
                         @Html.HiddenFor(model => model.CustomerID)

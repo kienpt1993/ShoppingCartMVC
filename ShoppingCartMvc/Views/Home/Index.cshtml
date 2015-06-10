@@ -3,7 +3,17 @@
     Layout = "~/Views/Shared/_layout.cshtml";
 }
 
+@{
+    ViewBag.Title = "returnUrl";
+}
 
+<h2>After Login</h2>
+@if (Session["UserName"] != null)
+{
+    <text>
+        Welcome @Session["UserName"].ToString()
+    </text>
+}
 <section id="slider">
     <!--slider-->
     <div class="container">
