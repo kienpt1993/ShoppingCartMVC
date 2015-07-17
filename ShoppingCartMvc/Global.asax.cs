@@ -16,9 +16,10 @@ namespace ShoppingCartMvc
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+         
             
 
-            // IP cua TQ khong duoc truy cap
+            
         }
     }
 }

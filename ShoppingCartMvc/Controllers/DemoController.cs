@@ -19,4 +19,3 @@ namespace ShoppingCartMvc.Controllers
        
 	}
 }
-// Them xoa sua danh muc, them xoa sua san pham ... Backend

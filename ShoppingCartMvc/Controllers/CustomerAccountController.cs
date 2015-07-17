@@ -41,7 +41,6 @@ namespace ShoppingCartMvc.Controllers
                 }
             }
 
-            // If we got this far, something failed, redisplay form
             return RedirectToAction("Index");
         }
         private ActionResult RedirectToLocal(string returnUrl)
@@ -78,7 +77,7 @@ namespace ShoppingCartMvc.Controllers
            
         }
         [HttpPost]
-        [ValidateAntiForgeryToken] // neu khong muon thi bo dong nay di, bo luon trong view , de thi phai de ca 2
+        [ValidateAntiForgeryToken] 
         public ActionResult MyLogout()
         {
             Session.Abandon();

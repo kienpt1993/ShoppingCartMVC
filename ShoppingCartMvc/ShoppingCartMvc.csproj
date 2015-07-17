@@ -53,15 +53,15 @@
     </Reference>
     <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.0\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.AspNet.Identity.EntityFramework, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.2.0\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+      <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.2.1\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.AspNet.Identity.Owin, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Microsoft.AspNet.Identity.Owin.2.2.0\lib\net45\Microsoft.AspNet.Identity.Owin.dll</HintPath>
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Owin.2.2.1\lib\net45\Microsoft.AspNet.Identity.Owin.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.Owin, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -100,9 +100,15 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Microsoft.Owin.Security.Twitter.3.0.1\lib\net45\Microsoft.Owin.Security.Twitter.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Newtonsoft.Json.6.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="PagedList">
+      <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
+    </Reference>
+    <Reference Include="PagedList.Mvc">
+      <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -173,6 +179,19 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\Band_ProductController.cs" />
+    <Compile Include="Areas\Admin\Controllers\BrandsController.cs" />
+    <Compile Include="Areas\Admin\Controllers\CalendarController.cs" />
+    <Compile Include="Areas\Admin\Controllers\CategoriesController.cs" />
+    <Compile Include="Areas\Admin\Controllers\CustomersController.cs" />
+    <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
+    <Compile Include="Areas\Admin\Controllers\MessagesController.cs" />
+    <Compile Include="Areas\Admin\Controllers\OrthersController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ProductsController.cs" />
+    <Compile Include="Areas\Admin\Controllers\TasksController.cs" />
+    <Compile Include="Areas\Admin\Controllers\UIController.cs" />
+    <Compile Include="Areas\Admin\Controllers\WidgetsController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\Brand_ProductController.cs" />
     <Compile Include="Controllers\CartController.cs" />
@@ -190,11 +209,15 @@
     <Compile Include="Controllers\PageController.cs" />
     <Compile Include="Controllers\PaymenMethodController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
+    <Compile Include="Controllers\SendMailController.cs" />
+    <Compile Include="Controllers\viduController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Category_Brand.cs" />
+    <Compile Include="Models\ContactModel.cs" />
+    <Compile Include="Models\EmailService.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\MyCart.cs" />
     <Compile Include="Models\PCMenu.cs" />
@@ -202,6 +225,148 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\Admin\css\bootstrap-responsive.css" />
+    <Content Include="Content\Admin\css\bootstrap-responsive.min.css" />
+    <Content Include="Content\Admin\css\bootstrap.css" />
+    <Content Include="Content\Admin\css\bootstrap.min.css" />
+    <Content Include="Content\Admin\css\chosen.css" />
+    <Content Include="Content\Admin\css\elfinder.min.css" />
+    <Content Include="Content\Admin\css\elfinder.theme.css" />
+    <Content Include="Content\Admin\css\font-awesome-ie7.min.css" />
+    <Content Include="Content\Admin\css\font-awesome.min.css" />
+    <Content Include="Content\Admin\css\fullcalendar.css" />
+    <Content Include="Content\Admin\css\glyphicons.css" />
+    <Content Include="Content\Admin\css\halflings.css" />
+    <Content Include="Content\Admin\css\ie.css" />
+    <Content Include="Content\Admin\css\ie9.css" />
+    <Content Include="Content\Admin\css\jquery-ui-1.8.21.custom.css" />
+    <Content Include="Content\Admin\css\jquery.cleditor.css" />
+    <Content Include="Content\Admin\css\jquery.gritter.css" />
+    <Content Include="Content\Admin\css\jquery.iphone.toggle.css" />
+    <Content Include="Content\Admin\css\jquery.noty.css" />
+    <Content Include="Content\Admin\css\noty_theme_default.css" />
+    <Content Include="Content\Admin\css\style-forms.css" />
+    <Content Include="Content\Admin\css\style-responsive.css" />
+    <Content Include="Content\Admin\css\style.css" />
+    <Content Include="Content\Admin\css\uniform.default.css" />
+    <Content Include="Content\Admin\css\uploadify.css" />
+    <Content Include="Content\Admin\font\glyphicons-regular.svg" />
+    <Content Include="Content\Admin\font\glyphiconshalflings-regular.svg" />
+    <Content Include="Content\Admin\img\arrows-active.png" />
+    <Content Include="Content\Admin\img\arrows-normal.png" />
+    <Content Include="Content\Admin\img\avatar.jpg" />
+    <Content Include="Content\Admin\img\bg-input-focus.png" />
+    <Content Include="Content\Admin\img\bg-input.png" />
+    <Content Include="Content\Admin\img\bg-login.jpg" />
+    <Content Include="Content\Admin\img\browser-chrome-big.png" />
+    <Content Include="Content\Admin\img\browser-firefox-big.png" />
+    <Content Include="Content\Admin\img\browser-ie.png" />
+    <Content Include="Content\Admin\img\browser-opera.png" />
+    <Content Include="Content\Admin\img\browser-safari.png" />
+    <Content Include="Content\Admin\img\buttons.gif" />
+    <Content Include="Content\Admin\img\chat-left%402x.png" />
+    <Content Include="Content\Admin\img\chat-left-metro%402x.png" />
+    <Content Include="Content\Admin\img\chat-left-metro.png" />
+    <Content Include="Content\Admin\img\chat-left.png" />
+    <Content Include="Content\Admin\img\chat-right%402x.png" />
+    <Content Include="Content\Admin\img\chat-right-metro%402x.png" />
+    <Content Include="Content\Admin\img\chat-right-metro.png" />
+    <Content Include="Content\Admin\img\chat-right.png" />
+    <Content Include="Content\Admin\img\chosen-sprite.png" />
+    <Content Include="Content\Admin\img\close-button-white.png" />
+    <Content Include="Content\Admin\img\close-button.png" />
+    <Content Include="Content\Admin\img\crop.gif" />
+    <Content Include="Content\Admin\img\dialogs.png" />
+    <Content Include="Content\Admin\img\gallery\photo1.jpg" />
+    <Content Include="Content\Admin\img\gallery\photo10.jpg" />
+    <Content Include="Content\Admin\img\gallery\photo11.jpg" />
+    <Content Include="Content\Admin\img\gallery\photo12.jpg" />
+    <Content Include="Content\Admin\img\gallery\photo13.jpg" />
+    <Content Include="Content\Admin\img\gallery\photo2.jpg" />
+    <Content Include="Content\Admin\img\gallery\photo3.jpg" />
+    <Content Include="Content\Admin\img\gallery\photo4.jpg" />
+    <Content Include="Content\Admin\img\gallery\photo5.jpg" />
+    <Content Include="Content\Admin\img\gallery\photo6.jpg" />
+    <Content Include="Content\Admin\img\gallery\photo7.jpg" />
+    <Content Include="Content\Admin\img\gallery\photo8.jpg" />
+    <Content Include="Content\Admin\img\gallery\photo9.jpg" />
+    <Content Include="Content\Admin\img\glyphicons-halflings-white.png" />
+    <Content Include="Content\Admin\img\glyphicons-halflings.png" />
+    <Content Include="Content\Admin\img\glyphicons-white.png" />
+    <Content Include="Content\Admin\img\glyphicons-white.svg" />
+    <Content Include="Content\Admin\img\glyphicons.png" />
+    <Content Include="Content\Admin\img\glyphicons.svg" />
+    <Content Include="Content\Admin\img\glyphicons_halflings-white.png" />
+    <Content Include="Content\Admin\img\glyphicons_halflings-white.svg" />
+    <Content Include="Content\Admin\img\glyphicons_halflings.png" />
+    <Content Include="Content\Admin\img\glyphicons_halflings.svg" />
+    <Content Include="Content\Admin\img\icons-big.png" />
+    <Content Include="Content\Admin\img\icons-small.png" />
+    <Content Include="Content\Admin\img\iphone-style-checkboxes\off-63584.png" />
+    <Content Include="Content\Admin\img\iphone-style-checkboxes\on-63584.png" />
+    <Content Include="Content\Admin\img\iphone-style-checkboxes\slider_center-63584.png" />
+    <Content Include="Content\Admin\img\iphone-style-checkboxes\slider_left-63584.png" />
+    <Content Include="Content\Admin\img\iphone-style-checkboxes\slider_right-63584.png" />
+    <Content Include="Content\Admin\img\progress.gif" />
+    <Content Include="Content\Admin\img\quicklook-bg.png" />
+    <Content Include="Content\Admin\img\quicklook-icons.png" />
+    <Content Include="Content\Admin\img\quote.png" />
+    <Content Include="Content\Admin\img\resize.png" />
+    <Content Include="Content\Admin\img\slider_r8.png" />
+    <Content Include="Content\Admin\img\spinner-mini.gif" />
+    <Content Include="Content\Admin\img\sprite.png" />
+    <Content Include="Content\Admin\img\timeline-bg.png" />
+    <Content Include="Content\Admin\img\timeline-left-arrow%402x.png" />
+    <Content Include="Content\Admin\img\timeline-left-arrow.png" />
+    <Content Include="Content\Admin\img\timeline-right-arrow%402x.png" />
+    <Content Include="Content\Admin\img\timeline-right-arrow.png" />
+    <Content Include="Content\Admin\img\toolbar.gif" />
+    <Content Include="Content\Admin\img\toolbar.png" />
+    <Content Include="Content\Admin\img\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Content\Admin\img\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Content\Admin\img\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Content\Admin\img\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Content\Admin\img\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Content\Admin\img\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Content\Admin\img\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Content\Admin\img\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Content\Admin\img\ui-icons_222222_256x240.png" />
+    <Content Include="Content\Admin\img\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Content\Admin\img\ui-icons_454545_256x240.png" />
+    <Content Include="Content\Admin\img\ui-icons_888888_256x240.png" />
+    <Content Include="Content\Admin\img\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Content\Admin\img\uploadify-cancel.png" />
+    <Content Include="Content\Admin\js\bootstrap.js" />
+    <Content Include="Content\Admin\js\bootstrap.min.js" />
+    <Content Include="Content\Admin\js\counter.js" />
+    <Content Include="Content\Admin\js\custom.js" />
+    <Content Include="Content\Admin\js\excanvas.js" />
+    <Content Include="Content\Admin\js\fullcalendar.min.js" />
+    <Content Include="Content\Admin\js\jquery-1.9.1.min.js" />
+    <Content Include="Content\Admin\js\jquery-migrate-1.0.0.min.js" />
+    <Content Include="Content\Admin\js\jquery-ui-1.10.0.custom.min.js" />
+    <Content Include="Content\Admin\js\jquery.chosen.min.js" />
+    <Content Include="Content\Admin\js\jquery.cleditor.min.js" />
+    <Content Include="Content\Admin\js\jquery.cookie.js" />
+    <Content Include="Content\Admin\js\jquery.dataTables.min.js" />
+    <Content Include="Content\Admin\js\jquery.elfinder.min.js" />
+    <Content Include="Content\Admin\js\jquery.flot.js" />
+    <Content Include="Content\Admin\js\jquery.flot.pie.js" />
+    <Content Include="Content\Admin\js\jquery.flot.resize.min.js" />
+    <Content Include="Content\Admin\js\jquery.flot.stack.js" />
+    <Content Include="Content\Admin\js\jquery.gritter.min.js" />
+    <Content Include="Content\Admin\js\jquery.imagesloaded.js" />
+    <Content Include="Content\Admin\js\jquery.iphone.toggle.js" />
+    <Content Include="Content\Admin\js\jquery.knob.modified.js" />
+    <Content Include="Content\Admin\js\jquery.masonry.min.js" />
+    <Content Include="Content\Admin\js\jquery.noty.js" />
+    <Content Include="Content\Admin\js\jquery.raty.min.js" />
+    <Content Include="Content\Admin\js\jquery.sparkline.min.js" />
+    <Content Include="Content\Admin\js\jquery.ui.touch-punch.js" />
+    <Content Include="Content\Admin\js\jquery.uniform.min.js" />
+    <Content Include="Content\Admin\js\jquery.uploadify-3.1.min.js" />
+    <Content Include="Content\Admin\js\modernizr.js" />
+    <Content Include="Content\Admin\js\retina.js" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -215,17 +380,14 @@
     <Content Include="Content\css\responsive.css" />
     <Content Include="Content\fonts\fontawesome-webfont.svg" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Content\PagedList.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="fonts\glyphicons-halflings-regular.eot" />
-    <Content Include="Content\bootstrap-theme.css.map" />
-    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Icon.png" />
     <Content Include="images\404\404.png" />
     <Content Include="images\blog\blog-one.jpg" />
     <Content Include="images\blog\blog-three.jpg" />
@@ -284,8 +446,6 @@
     <Content Include="images\shop\product7.jpg" />
     <Content Include="images\shop\product8.jpg" />
     <Content Include="images\shop\product9.jpg" />
-    <Content Include="Scripts\bootstrap.js" />
-    <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="fonts\fontawesome-webfont.woff" />
     <Content Include="fonts\FontAwesome.otf" />
     <Content Include="Content\fonts\fontawesome-webfont.woff" />
@@ -294,10 +454,68 @@
     <Content Include="Content\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.woff" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.woff2" />
-    <None Include="Scripts\jquery-2.1.3.intellisense.js" />
-    <Content Include="Scripts\jquery-2.1.3.js" />
-    <Content Include="Scripts\jquery-2.1.3.min.js" />
-    <Content Include="Scripts\jquery-2.1.3.min.map" />
+    <Content Include="Content\Admin\font\fontawesome-webfont-0.eot" />
+    <Content Include="Content\Admin\font\fontawesome-webfont-62877.eot" />
+    <Content Include="Content\Admin\font\fontawesome-webfont-62877.ttf" />
+    <Content Include="Content\Admin\font\fontawesome-webfont-62877.woff" />
+    <Content Include="Content\Admin\font\glyphicons-regular-0.eot" />
+    <Content Include="Content\Admin\font\glyphicons-regular.eot" />
+    <Content Include="Content\Admin\font\glyphicons-regular.ttf" />
+    <Content Include="Content\Admin\font\glyphicons-regular.woff" />
+    <Content Include="Content\Admin\font\glyphiconshalflings-regular-0.eot" />
+    <Content Include="Content\Admin\font\glyphiconshalflings-regular.eot" />
+    <Content Include="Content\Admin\font\glyphiconshalflings-regular.ttf" />
+    <Content Include="Content\Admin\font\glyphiconshalflings-regular.woff" />
+    <Content Include="Areas\Admin\Views\web.config" />
+    <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Admin\Views\Home\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Calendar\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Messages\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Tasks\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\UI\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Widgets\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Categories\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Categories\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Categories\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Categories\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Categories\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Products\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Products\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Products\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Products\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Products\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Band_Product\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Band_Product\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Band_Product\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Band_Product\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Band_Product\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Brands\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Brands\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Brands\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Brands\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Brands\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Customers\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Customers\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Customers\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Customers\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Customers\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Orthers\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Orthers\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Orthers\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Orthers\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Orthers\Index.cshtml" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
+    <None Include="Scripts\jquery-2.1.4.intellisense.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\jquery-2.1.4.js" />
+    <Content Include="Scripts\jquery-2.1.4.min.js" />
+    <Content Include="Scripts\jquery-2.1.4.min.map" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
@@ -319,7 +537,9 @@
     <Content Include="Scripts\respond.matchmedia.addListener.min.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -403,9 +623,13 @@
     <Content Include="Views\CustomerAccount\MyRegister.cshtml" />
     <Content Include="Views\CustomerAccount\MyLogin.cshtml" />
     <Content Include="Views\Shared\_MyLoginPartial.cshtml" />
+    <Content Include="Views\vidu\Index.cshtml" />
+    <Content Include="Views\SendMail\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\Admin\Models\" />
+    <Folder Include="Views\SendMailController\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
