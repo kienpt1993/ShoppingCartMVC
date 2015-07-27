@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ShopingCartEF;
+using System.IO;
 
 namespace ShoppingCartMvc.Areas.Admin.Controllers
 {
@@ -46,17 +47,27 @@ namespace ShoppingCartMvc.Areas.Admin.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "CategoryID,Name,Description,ImageUrl,ParentID,SortOrder,IsPublished")] Category category)
+        public ActionResult Create([Bind(Include = "CategoryID,Name,Description,ImageUrl,ParentID,SortOrder,IsPublished")] Category category, HttpPostedFileBase uploadFile)
         {
             if (ModelState.IsValid)
             {
+
+                if (uploadFile!=null)
+                {
+                    //string filePath = Path.Combine(HttpContext.Server.MapPath("/Images"), Path.GetFileName(uploadFile.FileName));
+                    string filePath = HttpContext.Server.MapPath("/Images");
+                    uploadFile.SaveAs(filePath + "/" + uploadFile.FileName);
+                    category.ImageUrl = "/images/" + uploadFile.FileName;
+
+                }
                 db.Categories.Add(category);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-
+           
             return View(category);
         }
+        
 
         // GET: Admin/Categories/Edit/5
         public ActionResult Edit(int? id)
@@ -78,14 +89,24 @@ namespace ShoppingCartMvc.Areas.Admin.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "CategoryID,Name,Description,ImageUrl,ParentID,SortOrder,IsPublished")] Category category)
+        public ActionResult Edit([Bind(Include = "CategoryID,Name,Description,ImageUrl,ParentID,SortOrder,IsPublished")] Category category, HttpPostedFileBase uploadFile)
         {
             if (ModelState.IsValid)
             {
+
+                if (uploadFile!=null)
+                {
+                    //string filePath = Path.Combine(HttpContext.Server.MapPath("/Images"), Path.GetFileName(uploadFile.FileName));
+                    string filePath = HttpContext.Server.MapPath("/Images");
+                    uploadFile.SaveAs(filePath + "/" + uploadFile.FileName);
+                    category.ImageUrl = "/images/" + uploadFile.FileName;
+
+                }
                 db.Entry(category).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+           
             return View(category);
         }
 
