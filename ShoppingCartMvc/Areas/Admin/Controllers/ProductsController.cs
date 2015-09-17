@@ -7,6 +7,8 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ShopingCartEF;
+using ColorLife.Core.Mvc;
+
 
 namespace ShoppingCartMvc.Areas.Admin.Controllers
 {
@@ -15,10 +17,15 @@ namespace ShoppingCartMvc.Areas.Admin.Controllers
         private ShoppingCartEntities db = new ShoppingCartEntities();
 
         // GET: Admin/Products
-        public ActionResult Index()
+        public ActionResult Index(int? page)
         {
+            int pageIndex = (page ?? 1);
+            int pageSize = 10;
             var products = db.Products.Include(p => p.Brand).Include(p => p.Category);
-            return View(products.ToList());
+            var model = products.ToList().ToPagedList(pageIndex, pageSize);
+            if (Request.IsAjaxRequest())
+                return PartialView("_ListPartial", model);
+            return View(model);
         }
 
         // GET: Admin/Products/Details/5

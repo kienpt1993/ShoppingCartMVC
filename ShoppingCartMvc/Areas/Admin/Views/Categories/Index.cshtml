@@ -70,7 +70,10 @@
                             <th aria-label="Actions: activate to sort column ascending" style="width: 288px;" colspan="1" rowspan="1" aria-controls="DataTables_Table_0" tabindex="0" role="columnheader" class="sorting">
                                 Actions
                             </th>
-                           
+                            <th aria-label="Status: activate to sort column ascending" style="width: 144px;" colspan="1" rowspan="1" aria-controls="DataTables_Table_0" tabindex="0" role="columnheader" class="sorting">
+                                ParentID
+                            </th>
+
                         </tr>
                     </thead>
 
@@ -102,7 +105,7 @@
                                 </td>
                                 <td class="center ">
 
-                                    <a class="btn btn-success" href="@Url.Action("Create", "Categories", new { id = item.CategoryID })">
+                                    <a class="btn btn-success" href="@Url.Action("Details", "Categories", new { id = item.CategoryID })">
                                         <i class="halflings-icon white zoom-in"></i>
                                     </a>
                                     <a class="btn btn-info" href="@Url.Action("Edit", "Categories", new { id=item.CategoryID })">
@@ -154,8 +157,63 @@
 
 </div><!--/row-->
 
+
+
+<h2>Index</h2>
+
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ImageUrl)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ParentID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SortOrder)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsPublished)
+        </th>
+        <th></th>
+    </tr>
 
- 
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ImageUrl)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ParentID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SortOrder)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsPublished)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.CategoryID }) |
+                @Html.ActionLink("Details", "Details", new { id = item.CategoryID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.CategoryID })
+            </td>
+        </tr>
+    }
+
+</table>
